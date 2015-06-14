@@ -39,7 +39,7 @@ class Package
     {
         if(empty($package)) return null;
 
-        array_map(function($k, $v) {
+        array_map(function($k) {
             $deps = [];
 
             if(!empty($k)) {
@@ -48,7 +48,7 @@ class Package
             }
 
             $this->recursiveGet($deps);
-        }, array_keys($package), $package);
+        }, array_keys($package));
     }
 
     private function getDeps($package)
@@ -61,18 +61,5 @@ class Package
 
         // Filter out non packages
         return (new Filter($required))->run();
-    }
-
-    private function cleanArray($array)
-    {
-        if($array == null) {
-            return $array;
-        }
-
-        while(key($array) == 0) {
-            $array = $array[0];
-        }
-
-        return $array;
     }
 }
