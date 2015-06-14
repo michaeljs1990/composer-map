@@ -29,20 +29,25 @@ class Package
     public function execute()
     {
         $package = [$this->package => "dev-master"];
-        while($package = $this->recursiveGet($package)) {
-            array_push($this->graph, $package);
-            $package = $this->cleanArray($package);
-        }
 
-        var_dump($this->graph);
+        $this->recursiveGet($package);
+
+        $this->output->write(count($this->graph) . " required dependencies" . PHP_EOL);
     }
 
     private function recursiveGet($package)
     {
-        var_dump($package);
-        return array_map(function($k, $v) use ($package) {
-            if(!empty($k)) return $this->getDeps($k);
-            else return false;
+        if(empty($package)) return null;
+
+        array_map(function($k, $v) {
+            $deps = [];
+
+            if(!empty($k)) {
+                $deps = $this->getDeps($k);
+                $this->graph = array_merge($this->graph, $deps);
+            }
+
+            $this->recursiveGet($deps);
         }, array_keys($package), $package);
     }
 

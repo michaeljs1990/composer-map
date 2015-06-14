@@ -20,12 +20,13 @@ class Filter
 
     public function run()
     {
-        if(array_key_exists('php', $this->array)) {
-            unset($this->array['php']);
-        }
-
-        if(array_key_exists('ext-mbstring', $this->array)) {
-            unset($this->array['ext-mbstring']);
+        // array_filter on k/v doesn't work in
+        // php55 without a pollyfill
+        foreach($this->array as $k => $v) {
+            $size = explode("/", $k);
+            if(count($size) <= 1) {
+                unset($this->array[$k]);
+            }
         }
 
         return $this->array;

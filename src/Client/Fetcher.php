@@ -30,7 +30,6 @@ class Fetcher
     {
         $client = new Client();
         $response = $client->get($this->baseURL . $this->package . ".json");
-        echo $this->baseURL . $this->package . ".json" . PHP_EOL;
         return $response->getBody();
     }
 }
