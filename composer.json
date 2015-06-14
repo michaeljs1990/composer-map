@@ -15,5 +15,11 @@
     "autoload": {
         "psr-4": { "Michaeljs1990\\Cmap\\": "src" }
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8"
+    },
+    "autoload-dev": {
+      "psr-4": { "Michaeljs1990\\Cmap\\Test\\": "test" }
+    },
     "minimum-stability": "dev"
 }

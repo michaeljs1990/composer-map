@@ -19,6 +19,11 @@ class Package
 
     const BASE_URL = "https://packagist.org/packages/";
 
+    /**
+     * @param $package
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     public function __construct($package, InputInterface $input, OutputInterface $output)
     {
         $this->package = $package;
@@ -33,8 +38,20 @@ class Package
         $this->recursiveGet($package);
 
         $this->output->write(count($this->graph) . " required dependencies" . PHP_EOL);
+
+        if($this->input->getOption("verbose")) {
+            $this->verbose();
+        }
+
+        var_dump($this->graph);
     }
 
+    /**
+     * Recursively get all packages
+     *
+     * @param $package
+     * @return null
+     */
     private function recursiveGet($package)
     {
         if(empty($package)) return null;
@@ -51,6 +68,12 @@ class Package
         }, array_keys($package));
     }
 
+    /**
+     * Get all the dependencies for a specified package
+     *
+     * @param $package
+     * @return array
+     */
     private function getDeps($package)
     {
         $fetcher = new Fetcher(self::BASE_URL, $package);
@@ -61,5 +84,10 @@ class Package
 
         // Filter out non packages
         return (new Filter($required))->run();
+    }
+
+    private function verbose()
+    {
+
     }
 }

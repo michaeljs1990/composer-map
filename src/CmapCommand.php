@@ -4,6 +4,7 @@ namespace Michaeljs1990\Cmap;
 
 use Michaeljs1990\Cmap\Graph\Package;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,6 +26,12 @@ class CmapCommand extends Command
                 'package',
                 InputArgument::REQUIRED,
                 'Composer package in question?'
+            )
+            ->addOption(
+                "verbose",
+                null,
+                InputOption::VALUE_NONE,
+                'See a graph of all dependencies'
             )
         ;
     }
