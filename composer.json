@@ -1,0 +1,19 @@
+{
+    "name": "michaeljs1990/cmap",
+    "description": "Composer check package dependencies",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Schuett",
+            "email": "michaeljs1990@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "~2.8",
+        "guzzlehttp/guzzle": "~6"
+    },
+    "autoload": {
+        "psr-4": { "Michaeljs1990\\Cmap\\": "src" }
+    },
+    "minimum-stability": "dev"
+}
