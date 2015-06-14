@@ -1,6 +1,6 @@
 <?php
 
-namespace Michaeljs1990\Cmap;
+namespace Michaeljs1990\Cmap\CStruct;
 
 class Graph
 {
@@ -24,7 +24,6 @@ class Graph
      */
     public function advance($index)
     {
-
         $this->current = $this->current->getDependency($index);
     }
 

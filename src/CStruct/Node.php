@@ -1,6 +1,6 @@
 <?php
 
-namespace Michaeljs1990\Cmap;
+namespace Michaeljs1990\Cmap\CStruct;
 
 class Node
 {

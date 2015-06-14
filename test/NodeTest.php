@@ -2,7 +2,7 @@
 
 namespace Michaeljs1990\Cmap\Test;
 
-use Michaeljs1990\Cmap\Node;
+use Michaeljs1990\Cmap\CStruct\Node;
 
 class NodeTest extends \PHPUnit_Framework_TestCase
 {

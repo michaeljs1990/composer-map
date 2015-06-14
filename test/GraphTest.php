@@ -2,8 +2,8 @@
 
 namespace Michaeljs1990\Cmap\Test;
 
-use Michaeljs1990\Cmap\Graph;
-use Michaeljs1990\Cmap\Node;
+use Michaeljs1990\Cmap\CStruct\Graph;
+use Michaeljs1990\Cmap\CStruct\Node;
 
 class GraphTest extends \PHPUnit_Framework_TestCase
 {
