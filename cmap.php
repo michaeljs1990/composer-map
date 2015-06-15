@@ -1,7 +1,6 @@
-#!/usr/bin/env php
 <?php
 
-require __DIR__ . "/../../autoload.php";
+require "vendor/autoload.php";
 
 use Michaeljs1990\Cmap\CmapCommand;
 use Symfony\Component\Console\Application;
