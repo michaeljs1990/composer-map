@@ -39,7 +39,9 @@ class Package
 
         $this->recursiveGet($package);
 
-        $this->output->write($this->graph->size() . " required dependencies" . PHP_EOL);
+        if(!$this->input->getOption("map")) {
+            $this->output->write($this->graph->size() . " required dependencies" . PHP_EOL);
+        }
 
         if($this->input->getOption("map")) {
             $this->printMap();

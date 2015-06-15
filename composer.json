@@ -21,5 +21,8 @@
     "autoload-dev": {
       "psr-4": { "Michaeljs1990\\Cmap\\Test\\": "test" }
     },
+    "bin": [
+        "cmap"
+    ],
     "minimum-stability": "dev"
 }
