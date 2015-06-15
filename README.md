@@ -111,13 +111,27 @@ Map the dependency graph of composer packages
                                     "nikic\/php-parser": "~1.3"
                                 },
                                 "dependencies": []
-                            },
+                            }
+                        ]
+                    },
+                    {
+                        "package": {
+                            "jeremeamia\/superclosure": "~2.0"
+                        },
+                        "dependencies": [
                             {
                                 "package": {
                                     "nikic\/php-parser": "~1.2"
                                 },
                                 "dependencies": []
-                            },
+                            }
+                        ]
+                    },
+                    {
+                        "package": {
+                            "psy\/psysh": "0.4.*"
+                        },
+                        "dependencies": [
                             {
                                 "package": {
                                     "nikic\/php-parser": "~1.0"
@@ -146,12 +160,6 @@ Map the dependency graph of composer packages
                                             "jakub-onderka\/php-console-color": "~0.1"
                                         },
                                         "dependencies": []
-                                    },
-                                    {
-                                        "package": {
-                                            "symfony\/translation": "~2.6"
-                                        },
-                                        "dependencies": []
                                     }
                                 ]
                             }
@@ -159,21 +167,16 @@ Map the dependency graph of composer packages
                     },
                     {
                         "package": {
-                            "jeremeamia\/superclosure": "~2.0"
-                        },
-                        "dependencies": []
-                    },
-                    {
-                        "package": {
-                            "psy\/psysh": "0.4.*"
-                        },
-                        "dependencies": []
-                    },
-                    {
-                        "package": {
                             "nesbot\/carbon": "~1.19"
                         },
-                        "dependencies": []
+                        "dependencies": [
+                            {
+                                "package": {
+                                    "symfony\/translation": "~2.6"
+                                },
+                                "dependencies": []
+                            }
+                        ]
                     },
                     {
                         "package": {
@@ -284,6 +287,7 @@ Map the dependency graph of composer packages
             }
         ]
     }
+
     
 ### Flags
 
