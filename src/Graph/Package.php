@@ -57,6 +57,7 @@ class Package
     private function recursiveGet($package)
     {
         if(empty($package)) {
+            $this->graph->back();
             return null;
         }
 
@@ -66,12 +67,12 @@ class Package
             $deps = [];
 
             if(!empty($k)) {
+                $this->graph->advance($k);
                 $deps = $this->getDeps($k);
                 $this->mapDependencies($deps);
             }
 
             $this->recursiveGet($deps);
-            $this->graph->back();
         }, array_keys($package));
     }
 
