@@ -68,7 +68,6 @@ class Package
             if(!empty($k)) {
                 $this->graph->advance($k);
                 $deps = $this->getDeps($k);
-                var_dump($k, $deps);
                 $this->mapDependencies($deps);
             }
 
