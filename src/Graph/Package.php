@@ -3,6 +3,7 @@
 namespace Michaeljs1990\Cmap\Graph;
 
 use Michaeljs1990\Cmap\Client\Fetcher;
+use Michaeljs1990\Cmap\CStruct\Graph;
 use Michaeljs1990\Cmap\Parser\Required;
 use Michaeljs1990\Cmap\Util\Filter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,8 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Package
 {
-    // hold dep graph
-    protected $graph = array();
+    // hold flat dep graph
+    protected $graph;
 
     protected $package;
     protected $input;
@@ -29,6 +30,7 @@ class Package
         $this->package = $package;
         $this->input = $input;
         $this->output = $output;
+        $this->graph = new Graph([$package => "dev-master"]);
     }
 
     public function execute()
@@ -37,13 +39,11 @@ class Package
 
         $this->recursiveGet($package);
 
-        $this->output->write(count($this->graph) . " required dependencies" . PHP_EOL);
+        $this->output->write($this->graph->size() . " required dependencies" . PHP_EOL);
 
-        if($this->input->getOption("verbose")) {
-            $this->verbose();
+        if($this->input->getOption("map")) {
+            $this->printMap();
         }
-
-        var_dump($this->graph);
     }
 
     /**
@@ -54,17 +54,22 @@ class Package
      */
     private function recursiveGet($package)
     {
-        if(empty($package)) return null;
+        if(empty($package)) {
+            return null;
+        }
+
+        $this->graph->advance(key($package));
 
         array_map(function($k) {
             $deps = [];
 
             if(!empty($k)) {
                 $deps = $this->getDeps($k);
-                $this->graph = array_merge($this->graph, $deps);
+                $this->mapDependencies($deps);
             }
 
             $this->recursiveGet($deps);
+            $this->graph->back();
         }, array_keys($package));
     }
 
@@ -86,8 +91,20 @@ class Package
         return (new Filter($required))->run();
     }
 
-    private function verbose()
+    /**
+     * Map given dependencies to graph
+     *
+     * @param array $deps
+     */
+    private function mapDependencies(array $deps)
     {
+        array_map(function($k, $v) {
+            $this->graph->set([$k => $v]);
+        }, array_keys($deps), $deps);
+    }
 
+    private function printMap()
+    {
+        $this->output->write(json_encode($this->graph, JSON_PRETTY_PRINT) . PHP_EOL);
     }
 }

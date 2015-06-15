@@ -28,7 +28,7 @@ class CmapCommand extends Command
                 'Composer package in question?'
             )
             ->addOption(
-                "verbose",
+                "map",
                 null,
                 InputOption::VALUE_NONE,
                 'See a graph of all dependencies'

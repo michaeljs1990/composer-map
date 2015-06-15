@@ -2,7 +2,7 @@
 
 namespace Michaeljs1990\Cmap\CStruct;
 
-class Node
+class Node implements \JsonSerializable
 {
     protected $parent;
     protected $package;
@@ -46,5 +46,18 @@ class Node
     public function getDependencies()
     {
         return $this->deps;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "package" => $this->package,
+            "dependencies" => $this->deps,
+        ];
     }
 }
