@@ -33,6 +33,12 @@ class CmapCommand extends Command
                 InputOption::VALUE_NONE,
                 'See a graph of all dependencies'
             )
+            ->addOption(
+                "with-dev",
+                null,
+                InputOption::VALUE_NONE,
+                'get dev dependencies'
+            )
         ;
     }
 

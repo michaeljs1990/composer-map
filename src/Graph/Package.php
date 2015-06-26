@@ -4,7 +4,9 @@ namespace Michaeljs1990\Cmap\Graph;
 
 use Michaeljs1990\Cmap\Client\Fetcher;
 use Michaeljs1990\Cmap\CStruct\Graph;
+use Michaeljs1990\Cmap\Parser\Replace;
 use Michaeljs1990\Cmap\Parser\Required;
+use Michaeljs1990\Cmap\Parser\RequiredDev;
 use Michaeljs1990\Cmap\Util\Filter;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -89,6 +91,14 @@ class Package
 
         // Get initial dependencies
         $required = (new Required($json, "dev-master"))->parse();
+        $replace = (new Replace($json, "dev-master"))->parse();
+        $dev = [];
+        // Decide to get require-dev or not
+        if($this->input->getOption("with-dev")) {
+            $dev = (new RequiredDev($json, "dev-master"))->parse();
+        }
+
+        $required = array_merge($required, $replace, $dev);
 
         // Filter out non packages
         return (new Filter($required))->run();
