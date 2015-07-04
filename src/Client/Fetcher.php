@@ -14,11 +14,13 @@ class Fetcher
 {
     protected $baseURL;
     protected $package;
+    protected $client;
 
-    public function __construct($baseURL, $package)
+    public function __construct($baseURL, $package, Client $client)
     {
         $this->baseURL = $baseURL;
         $this->package = $package;
+        $this->client = $client;
     }
 
     /**
@@ -28,8 +30,7 @@ class Fetcher
      */
     public function get()
     {
-        $client = new Client();
-        $response = $client->get($this->baseURL . $this->package . ".json");
+        $response = $this->client->get($this->baseURL . $this->package . ".json");
         return $response->getBody();
     }
 }

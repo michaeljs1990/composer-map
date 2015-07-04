@@ -2,6 +2,7 @@
 
 namespace Michaeljs1990\Cmap\Graph;
 
+use GuzzleHttp\Client;
 use Michaeljs1990\Cmap\Client\Fetcher;
 use Michaeljs1990\Cmap\CStruct\Graph;
 use Michaeljs1990\Cmap\Parser\Replace;
@@ -15,6 +16,7 @@ class Package
 {
     // hold flat dep graph
     protected $graph;
+    protected $httpClient;
 
     protected $package;
     protected $input;
@@ -33,6 +35,7 @@ class Package
         $this->input = $input;
         $this->output = $output;
         $this->graph = new Graph([$package => "dev-master"]);
+        $this->httpClient = new Client();
     }
 
     public function execute()
@@ -86,7 +89,7 @@ class Package
      */
     private function getDeps($package)
     {
-        $fetcher = new Fetcher(self::BASE_URL, $package);
+        $fetcher = new Fetcher(self::BASE_URL, $package, $this->httpClient);
         $json = $fetcher->get();
 
         // Get initial dependencies
